@@ -10,9 +10,12 @@ def get_lyrics(artist, song):
     genius.verbose = False
     # genius.remove_section_headers = True
     song_info = genius.search_song(song, artist)
-    s = str(song_info.lyrics).splitlines()
-    for line in s:
-        print(translator.translate(text=line, dest="en").text)
+    if song_info is not None:
+        s = str(song_info.lyrics).splitlines()
+        for line in s:
+            print(translator.translate(text=line, dest="en").text)
+    else:
+        print(f"Lyrics for {song} are unavailable...")
 
 
 lyric_token = "3kOSGpjJUrFl3IJTWIpGqbbbmIO96C8zUq234ve4F_iJvsJdjgZTX-ChI0Mm3z_X"
