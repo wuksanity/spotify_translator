@@ -13,7 +13,10 @@ def get_lyrics(artist, song):
     if song_info is not None:
         s = str(song_info.lyrics).splitlines()
         fix_first = s[0]
+        fix_last = s[len(s)-1]
+        fix_last = fix_last[:fix_last.rfind("Embed")-1]
         fix_first = fix_first[fix_first.rfind("Lyrics") + 6:]
+        s[len(s)-1] = fix_last
         s[0] = fix_first
         for line in s:
             print(line + "               " + translator.translate(text=line, dest="en").text)
