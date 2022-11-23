@@ -12,8 +12,11 @@ def get_lyrics(artist, song):
     song_info = genius.search_song(song, artist)
     if song_info is not None:
         s = str(song_info.lyrics).splitlines()
+        fix_first = s[0]
+        fix_first = fix_first[fix_first.rfind("Lyrics") + 6:]
+        s[0] = fix_first
         for line in s:
-            print(translator.translate(text=line, dest="en").text)
+            print(line + "               " + translator.translate(text=line, dest="en").text)
     else:
         print(f"Lyrics for {song} are unavailable...")
 
